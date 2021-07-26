@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}" target="_blank">Public</a>
+                            <a class="nav-link" href="{{ ('guest.template') }}" target="_blank">Public</a>
                         </li>
                     </ul>
 
@@ -64,6 +64,9 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('admin.posts.index') }}">
                                         Lista Post
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.posts.create') }}">
+                                        Crea nuovo articolo
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
