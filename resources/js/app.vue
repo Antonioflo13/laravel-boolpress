@@ -1,17 +1,32 @@
 <template>
-    <div class="text-center">
-        <h1>Work in Progress!</h1>
+    <div>
+        <Header :links="link"/>
     </div>
 </template>
 
 <script>
+import Header from './components/Header'
 export default {
     name: 'App',
-}
+    components: {
+        Header,
+    },
+    data() {
+        return {
+            link: [
+                "Documentari",
+                "Tv",
+                "E-Book"
+            ]
+        }
+    }
+} 
 </script>
 
-<style>
-    h1 {
-        color: red;
+<style lang="scss">
+    div {
+        h1 {
+            color:red;
+        }
     }
 </style>
