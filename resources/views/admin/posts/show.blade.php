@@ -3,7 +3,11 @@
 @section('content')
     <section class="container my-5">
         <article>
-            <h1 class="mb-5">{{ $post->title }}</h1>
+            <h1 class="mb-5">{{ $post->title }}
+                @if ($post->category)
+                    <span class="badge badge-info">{{ $post->category->name }}</span>
+                @endif
+            </h1>
             <h3 class="mb-5">{{ $post->slug }}</h3>
             <h4 class="mb-5">{{ $post->content }}</h4>
             <a href="{{ route('admin.posts.index') }}" class="btn btn-primary">Elenco post</a>
