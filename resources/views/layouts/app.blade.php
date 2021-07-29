@@ -6,8 +6,17 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    @if (Route::currentRouteName()=='admin.posts.index')
+        <title>Laravel | Lista Prodotti</title>
+    @elseif (Route::currentRouteName()=='admin.posts.show')
+        <title>Laravel | Dettaglio prodotto</title>
+    @elseif (Route::currentRouteName()=='admin.posts.create')
+        <title>Laravel | Crea Articolo</title>
+    @elseif(Route::currentRouteName()=='admin.posts.edit')
+        <title>Laravel | Modifica Articolo</title>
+    @elseif(Route::currentRouteName())
+        <title>Laravel</title>
+    @endif
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

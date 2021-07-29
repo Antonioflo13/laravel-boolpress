@@ -13,7 +13,8 @@ class PostController extends Controller
     private $postValidationArray = [
         'title' => 'required|max:255',
         'content' => 'required',
-        'category_id' => 'nullable|exists:categories,id'
+        'category_id' => 'nullable|exists:categories,id',
+        'tags' => 'exists:tags,id'
     ];
 
     private function generateSlug($data) 
@@ -76,6 +77,10 @@ class PostController extends Controller
 
         $newPost->save();
 
+        if (array_key_exists('tags', $data)) {
+            $newPost->tags()->attach($data['tags']);
+        }
+
         return redirect()->route('admin.posts.show', $newPost->id);
     }
 
@@ -99,8 +104,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -121,6 +127,12 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        if (array_key_exists('tags', $data)) {
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
 
         return redirect()->route('admin.posts.show', $post->id);
     }

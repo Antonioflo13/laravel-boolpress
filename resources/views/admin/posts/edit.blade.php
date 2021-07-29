@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <section class="container my-5">
     <h4 class="mb-5">Modifica Post</h4>
@@ -28,6 +27,18 @@
                 <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>{{$category->name}}</option>
                 @endforeach
             </select>
+        </div>
+        <div>
+            @foreach ($tags as $tag)
+            <div class="form-check form-check-inline">
+                @if ($errors->any())
+                <input class="form-check-input" type="checkbox" id="{{$tag->id}}" value="{{$tag->id}}" name="tags[]" {{in_array($tag->id, old('tags',[])) ? 'checked' : ''}}>
+                @else 
+                    <input class="form-check-input" type="checkbox" id="{{$tag->id}}" value="{{$tag->id}}" name="tags[]" {{$post->tags->contains($tag->id) ? 'checked' : '' }}>
+                @endif
+                <label class="form-check-label" for="{{$tag->id}}">{{$tag->name}}</label>
+            </div>
+            @endforeach
         </div>
         <button type="submit" class="btn btn-primary mt-5">Salva</button>
       </form>

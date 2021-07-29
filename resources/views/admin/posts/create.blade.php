@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="container my-5">
-    <h4 class="mb-5">Modifica Post</h4>
+    <h4 class="mb-5">Crea Post</h4>
     <form action="{{ route('admin.posts.store') }}" method="POST">
         @csrf
         @method('POST')
@@ -32,8 +32,8 @@
         <div>
             @foreach ($tags as $tag)  
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">{{$tag->name}}</label>
+                <input class="form-check-input" type="checkbox" id="{{$tag->id}}" value="{{$tag->id}}" name="tags[]" {{in_array($tag->id, old('tags',[])) ? 'checked' : ''}}>
+                <label class="form-check-label" for="{{$tag->id}}">{{$tag->name}}</label>
             </div>
             @endforeach
         </div>

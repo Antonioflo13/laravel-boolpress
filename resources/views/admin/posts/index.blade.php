@@ -12,7 +12,7 @@
                     <th scope="col">Contenuto</th>
                     <th scope="col">Categorie</th>
                     <th scope="col" colspan="3">Azioni</th>
-                  </tr>
+                  </tr> 
                 </thead>
                 <tbody>
                     @foreach ($posts as $post)
@@ -21,9 +21,11 @@
                       <td>{{ $post->title }}</td>
                       <td>{{ $post->slug }}</td>
                       <td>{{ $post->content }}</td>
-                      @if ($post->category)
-                      <td>{{ $post->category->name }}</td>
-                      @endif
+                      <td>
+                        @if ($post->category)
+                          {{ $post->category->name }}
+                        @endif
+                      </td>
                       <td><a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-info">Informazioni</a></td>
                       <td><a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-secondary">Modifica</a></td>
                       <td>
