@@ -1,6 +1,6 @@
 <template>
-  <main class="container">
-      <Card v-for="(post,index) in posts" :key="index" :posts="posts" />
+  <main class="container d-flex justify-content-center">
+      <Card v-for="(post,index) in posts" :key="index" :posts="post" />
   </main>
 </template>
 

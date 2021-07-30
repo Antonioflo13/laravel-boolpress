@@ -1932,14 +1932,31 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       link: ["Documentari", "Tv", "E-Book"],
-      posts: []
+      posts: [],
+      currentPage: 1,
+      lastPage: 1
     };
+  },
+  methods: {
+    substringText: function substringText(string, paragraphLength) {
+      if (string.length > paragraphLength) {
+        return string.substr(0, paragraphLength) + '...';
+      } else {
+        return string;
+      }
+    }
   },
   created: function created() {
     var _this = this;
 
-    axios.get('http://127.0.0.1:8000/api/posts').then(function (res) {
+    axios.get("http://127.0.0.1:8000/api/posts?page=".concat(this.currentPage)).then(function (res) {
       _this.posts = res.data.data;
+      _this.currentPage = res.data.current_page;
+      _this.lastPage = res.data.last_page;
+
+      _this.posts.forEach(function (element) {
+        element.substring = _this.substringText(element.content, 150);
+      });
     })["catch"]();
   }
 });
@@ -3219,23 +3236,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
-    _c("img", { staticClass: "card-img-top", attrs: { src: "", alt: "" } }),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("h5", { staticClass: "card-title" }, [
-        _vm._v(_vm._s(_vm.posts.title))
-      ]),
+  return _c(
+    "div",
+    { staticClass: "card m-3", staticStyle: { width: "18rem" } },
+    [
+      _c("img", { staticClass: "card-img-top", attrs: { src: "", alt: "" } }),
       _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [
-        _vm._v(_vm._s(_vm.posts.content))
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
-        _vm._v("Go somewhere")
+      _c("div", { staticClass: "card-body" }, [
+        _c("h5", { staticClass: "card-title" }, [
+          _vm._v(_vm._s(_vm.posts.title))
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "card-text" }, [
+          _vm._v(_vm._s(_vm.posts.substring))
+        ]),
+        _vm._v(" "),
+        _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
+          _vm._v("Entra")
+        ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3376,9 +3397,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "main",
-    { staticClass: "container" },
+    { staticClass: "container d-flex justify-content-center" },
     _vm._l(_vm.posts, function(post, index) {
-      return _c("Card", { key: index, attrs: { posts: _vm.posts } })
+      return _c("Card", { key: index, attrs: { posts: post } })
     }),
     1
   )
