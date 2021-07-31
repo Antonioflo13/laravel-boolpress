@@ -3,9 +3,12 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 
-                <li v-if="currentPage > 1" class="page-item" @click="backPage()"><button class="page-link" href="#">Previous</button></li>
-                <li  class="page-item" v-for="n in lastPage" :key="n" @click="setCurrentPage(n)"><button class="page-link" href="#">{{ n }}</button></li>
-                <li v-if="currentPage < lastPage" class="page-item" @click="nextPage()"><a class="page-link" href="#">Next</a></li>
+                <li v-if="currentPage > 1" class="page-item" @click="backPage()"><button class="btn btn-primary m-2" href="#">Previous</button></li>
+                <li  class="page-item" v-for="n in lastPage" :key="n" 
+                    @click="setCurrentPage(n)">
+                    <button class="btn m-2" href="#" :class="(n == currentPage) ? 'btn-primary' : 'btn-info'">{{ n }}</button>
+                </li>
+                <li v-if="currentPage < lastPage" class="page-item" @click="nextPage()"><button class="btn btn-primary m-2" href="#">Next</button></li>
             </ul>
         </nav>
     </div>

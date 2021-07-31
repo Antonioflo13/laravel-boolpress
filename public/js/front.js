@@ -2108,6 +2108,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Paginator',
   props: ['lastPage', 'currentPage'],
@@ -3390,7 +3393,7 @@ var render = function() {
       [
         _c("div", { staticClass: "container-fluid" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-            _vm._v("Navbar")
+            _vm._v("Boolpress")
           ]),
           _vm._v(" "),
           _vm._m(0),
@@ -3407,7 +3410,8 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "nav-link active",
+                      staticClass: "nav-link",
+                      class: link == index ? "active" : "",
                       attrs: { "aria-current": "page", href: "#" }
                     },
                     [_vm._v(_vm._s(link))]
@@ -3516,7 +3520,10 @@ var render = function() {
                 [
                   _c(
                     "button",
-                    { staticClass: "page-link", attrs: { href: "#" } },
+                    {
+                      staticClass: "btn btn-primary m-2",
+                      attrs: { href: "#" }
+                    },
                     [_vm._v("Previous")]
                   )
                 ]
@@ -3538,7 +3545,11 @@ var render = function() {
               [
                 _c(
                   "button",
-                  { staticClass: "page-link", attrs: { href: "#" } },
+                  {
+                    staticClass: "btn m-2",
+                    class: n == _vm.currentPage ? "btn-primary" : "btn-info",
+                    attrs: { href: "#" }
+                  },
                   [_vm._v(_vm._s(n))]
                 )
               ]
@@ -3557,9 +3568,14 @@ var render = function() {
                   }
                 },
                 [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("Next")
-                  ])
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary m-2",
+                      attrs: { href: "#" }
+                    },
+                    [_vm._v("Next")]
+                  )
                 ]
               )
             : _vm._e()
