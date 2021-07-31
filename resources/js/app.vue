@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header :links="link"/>
-        <Main :posts="posts"/>
+        <Main :posts="posts" :cats="cats"/>
         <Paginator 
         :lastPage="lastPage" :currentPage="currentPage" 
         @setCurrentPage="getPosts" @backPage="getPosts" @nextPage="getPosts"/>
@@ -31,6 +31,7 @@ export default {
                 "E-Book"
             ],
             posts: [],
+            cats: [],
             currentPage: 1,
             lastPage: 1,
         }
@@ -44,27 +45,43 @@ export default {
             }
         },
         getPosts: function(page = 1) {
-        axios 
-            .get(`http://127.0.0.1:8000/api/posts?page=${page}`)
-            .then(
-                res => {
-                    this.posts = res.data.data;
-                    this.currentPage = res.data.current_page;
-                    this.lastPage = res.data.last_page;
-                    this.posts.forEach(
-                        element => {
-                        element.substring = this.substringText(element.content, 150);
-                    });
-                }
-            )
-            .catch(
-                err => {
-                console.log(err);
-            });
-    },
+            axios 
+                .get(`http://127.0.0.1:8000/api/posts?page=${page}`)
+                .then(
+                    res => {
+                        this.posts = res.data.data;
+                        console.log(res.data);
+                        this.currentPage = res.data.current_page;
+                        this.lastPage = res.data.last_page;
+                        this.posts.forEach(
+                            element => {
+                            element.substring = this.substringText(element.content, 150);
+                        });
+                    }
+                )
+                .catch(
+                    err => {
+                    console.log(err);
+                });
+        },
+        getCategories: function() {
+            axios 
+                .get(`http://127.0.0.1:8000/api/categories`)
+                .then(
+                    res => {
+                        this.cats = res.data;
+                        console.log(res.data);
+                    }
+                )
+                .catch(
+                    err => {
+                    console.log(err);
+                });
+        },
     },
     created: function() {
         this.getPosts();
+        this.getCategories();
     }
 } 
 </script>

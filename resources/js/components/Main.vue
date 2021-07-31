@@ -1,6 +1,6 @@
 <template>
   <main class="container d-flex justify-content-center">
-      <Card v-for="(post,index) in posts" :key="index" :posts="post" />
+      <Card v-for="(post,index) in posts" :key="index" :posts="post" :cats="cats"  />
   </main>
 </template>
 
@@ -9,7 +9,7 @@ import Card from './Card.vue';
 
 export default {
     name: 'Main',
-    props: ['posts'],
+    props: ['posts','cats'],
     components: {
       Card,
     }

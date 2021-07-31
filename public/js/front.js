@@ -1939,6 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       link: ["Documentari", "Tv", "E-Book"],
       posts: [],
+      cats: [],
       currentPage: 1,
       lastPage: 1
     };
@@ -1957,6 +1958,7 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get("http://127.0.0.1:8000/api/posts?page=".concat(page)).then(function (res) {
         _this.posts = res.data.data;
+        console.log(res.data);
         _this.currentPage = res.data.current_page;
         _this.lastPage = res.data.last_page;
 
@@ -1966,10 +1968,21 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    getCategories: function getCategories() {
+      var _this2 = this;
+
+      axios.get("http://127.0.0.1:8000/api/categories").then(function (res) {
+        _this2.cats = res.data;
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   },
   created: function created() {
     this.getPosts();
+    this.getCategories();
   }
 });
 
@@ -1995,9 +2008,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Card',
-  props: ['posts']
+  props: ['posts', 'cats']
 });
 
 /***/ }),
@@ -2078,7 +2092,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Main',
-  props: ['posts'],
+  props: ['posts', 'cats'],
   components: {
     Card: _Card_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -3271,7 +3285,7 @@ var render = function() {
     [
       _c("Header", { attrs: { links: _vm.link } }),
       _vm._v(" "),
-      _c("Main", { attrs: { posts: _vm.posts } }),
+      _c("Main", { attrs: { posts: _vm.posts, cats: _vm.cats } }),
       _vm._v(" "),
       _c("Paginator", {
         attrs: { lastPage: _vm.lastPage, currentPage: _vm.currentPage },
@@ -3319,6 +3333,8 @@ var render = function() {
         _c("h4", { staticClass: "card-title" }, [
           _vm._v(_vm._s(_vm.posts.title))
         ]),
+        _vm._v(" "),
+        _c("h5", [_vm._v(_vm._s(_vm.cats.name))]),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(_vm._s(_vm.posts.substring))
@@ -3473,7 +3489,7 @@ var render = function() {
     "main",
     { staticClass: "container d-flex justify-content-center" },
     _vm._l(_vm.posts, function(post, index) {
-      return _c("Card", { key: index, attrs: { posts: post } })
+      return _c("Card", { key: index, attrs: { posts: post, cats: _vm.cats } })
     }),
     1
   )
