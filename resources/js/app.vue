@@ -2,6 +2,9 @@
     <div>
         <Header :links="link"/>
         <Main :posts="posts"/>
+        <Paginator 
+        :lastPage="lastPage" :currentPage="currentPage" 
+        @setCurrentPage="getPosts" @backPage="getPosts" @nextPage="getPosts"/>
         <Footer/>
     </div>
 </template>
@@ -9,6 +12,7 @@
 <script>
 import Header from './components/Header';
 import Main from './components/Main';
+import Paginator from './components/Paginator';
 import Footer from './components/Footer';
 
 export default {
@@ -16,6 +20,7 @@ export default {
     components: {
         Header,
         Main,
+        Paginator,
         Footer
     },
     data() {
@@ -27,7 +32,7 @@ export default {
             ],
             posts: [],
             currentPage: 1,
-            lastPage: 1
+            lastPage: 1,
         }
     },
     methods: {
@@ -38,10 +43,9 @@ export default {
                 return string;
             }
         },
-    },
-    created: function() {
+        getPosts: function(page = 1) {
         axios 
-            .get(`http://127.0.0.1:8000/api/posts?page=${this.currentPage}`)
+            .get(`http://127.0.0.1:8000/api/posts?page=${page}`)
             .then(
                 res => {
                     this.posts = res.data.data;
@@ -53,7 +57,14 @@ export default {
                     });
                 }
             )
-            .catch();
+            .catch(
+                err => {
+                console.log(err);
+            });
+    },
+    },
+    created: function() {
+        this.getPosts();
     }
 } 
 </script>
