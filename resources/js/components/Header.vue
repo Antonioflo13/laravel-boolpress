@@ -30,6 +30,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+    #navbarNav {
+        ul li {
+            a .router-link-active{
+                color: blue;
+            }
+        }
+    }
 
 </style>
