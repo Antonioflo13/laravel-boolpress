@@ -1,7 +1,12 @@
 <template>
     <section class="container">
         <h1>{{ post.title }}</h1>
+        <h3 v-if="post.category" class="badge badge-secondary">{{ post.category.name }}</h3>
+        <div v-for="tag in post.tags" :key="tag.id">
+            <span class="badge badge-success">{{ tag.name }}</span>
+        </div>
         <p>{{ post.content }}</p>
+        <router-link class="btn btn-primary" :to="{ name:'blog' }">Torna all' elenco Post</router-link>
     </section>
 </template>
 

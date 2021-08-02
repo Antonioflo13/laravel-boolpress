@@ -2158,6 +2158,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Details_page',
   data: function data() {
@@ -2864,10 +2869,7 @@ var render = function() {
                   [
                     _c(
                       "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: { name: "chisiamo" } }
-                      },
+                      { staticClass: "nav-link", attrs: { to: { name: "" } } },
                       [_vm._v("Chi siamo")]
                     )
                   ],
@@ -3077,11 +3079,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "container" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.post.content))])
-  ])
+  return _c(
+    "section",
+    { staticClass: "container" },
+    [
+      _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
+      _vm._v(" "),
+      _vm.post.category
+        ? _c("h3", { staticClass: "badge badge-secondary" }, [
+            _vm._v(_vm._s(_vm.post.category.name))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.post.tags, function(tag) {
+        return _c("div", { key: tag.id }, [
+          _c("span", { staticClass: "badge badge-success" }, [
+            _vm._v(_vm._s(tag.name))
+          ])
+        ])
+      }),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.post.content))]),
+      _vm._v(" "),
+      _c(
+        "router-link",
+        { staticClass: "btn btn-primary", attrs: { to: { name: "blog" } } },
+        [_vm._v("Torna all' elenco Post")]
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19066,10 +19093,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/blog',
     name: 'blog',
-    component: _pages_Blog__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }, {
-    path: '/chi-siamo',
-    name: 'about',
     component: _pages_Blog__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/blog/:slug',

@@ -21,11 +21,6 @@ const router = new VueRouter({
             component: Blog
         },
         {
-            path: '/chi-siamo',
-            name: 'about',
-            component: Blog
-        },
-        {
             path: '/blog/:slug',
             name: 'details-page',
             component: Details_page
