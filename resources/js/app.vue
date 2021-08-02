@@ -1,95 +1,26 @@
 <template>
     <div>
-        <Header :links="link"/>
-        <Main :posts="posts" :cats="cats"/>
-        <Paginator 
-        :lastPage="lastPage" :currentPage="currentPage" 
-        @setCurrentPage="getPosts" @backPage="getPosts" @nextPage="getPosts"/>
+        <Header/>
+        <main>
+            <router-view></router-view>
+        </main>
         <Footer/>
     </div>
 </template>
 
 <script>
 import Header from './components/Header';
-import Main from './components/Main';
-import Paginator from './components/Paginator';
 import Footer from './components/Footer';
 
 export default {
     name: 'App',
     components: {
         Header,
-        Main,
-        Paginator,
         Footer
     },
-    data() {
-        return {
-            link: [
-                "Documentari",
-                "Tv",
-                "E-Book"
-            ],
-            posts: [],
-            cats: [],
-            currentPage: 1,
-            lastPage: 1,
-        }
-    },
-    methods: {
-        substringText: function(string, paragraphLength) {
-            if(string.length > paragraphLength) {
-                return string.substr(0, paragraphLength) + '...';
-            } else {
-                return string;
-            }
-        },
-        getPosts: function(page = 1) {
-            axios 
-                .get(`http://127.0.0.1:8000/api/posts?page=${page}`)
-                .then(
-                    res => {
-                        this.posts = res.data.data;
-                        console.log(res.data);
-                        this.currentPage = res.data.current_page;
-                        this.lastPage = res.data.last_page;
-                        this.posts.forEach(
-                            element => {
-                            element.substring = this.substringText(element.content, 150);
-                        });
-                    }
-                )
-                .catch(
-                    err => {
-                    console.log(err);
-                });
-        },
-        getCategories: function() {
-            axios 
-                .get(`http://127.0.0.1:8000/api/categories`)
-                .then(
-                    res => {
-                        this.cats = res.data;
-                        console.log(res.data);
-                    }
-                )
-                .catch(
-                    err => {
-                    console.log(err);
-                });
-        },
-    },
-    created: function() {
-        this.getPosts();
-        this.getCategories();
-    }
 } 
 </script>
 
 <style lang="scss">
-    div {
-        h1 {
-            color:red;
-        }
-    }
+    
 </style>

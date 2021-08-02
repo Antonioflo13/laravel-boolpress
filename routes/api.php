@@ -24,5 +24,5 @@ Route::namespace('Api')
     });
 Route::namespace('Api')
     ->group(function() {
-        Route::get('categories','PostController@categories');
+        Route::get('posts/{slug}','PostController@show');
     });

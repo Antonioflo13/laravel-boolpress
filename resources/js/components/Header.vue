@@ -7,9 +7,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul v-for="(link,index) in links" :key="index" class="navbar-nav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" :class="(link == index ? 'active' : '')" aria-current="page" href="#">{{link}}</a>
+                            <router-link class="nav-link" :to="{ name:'home' }">Home</router-link>
+                        </li>
+                        <li>
+                            <router-link class="nav-link" :to="{ name:'blog' }">Blog</router-link>
+                        </li>
+                        <li>
+                            <router-link class="nav-link" :to="{ name:'chisiamo' }">Chi siamo</router-link>
                         </li>
                     </ul>
                 </div>
@@ -21,7 +27,6 @@
 <script>
 export default {
     name: 'header',
-    props: ["links"]
 }
 </script>
 
