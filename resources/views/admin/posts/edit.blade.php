@@ -39,6 +39,20 @@
                 <label class="form-check-label" for="{{$tag->id}}">{{$tag->name}}</label>
             </div>
             @endforeach
+            <div class="form-group">
+                <label for="cover">Immagine di copertina</label>
+
+                @if ($post->url_image)
+                    <div class="mb-3">
+                        <img style="width: 200px" src="{{ asset('storage/' . $post->url_image) }}" alt="{{ $post->title }}"> 
+                    </div>
+                @endif
+
+                <input type="file" name="url_image" class="form-control-file @error('url_image') is-invalid @enderror" id="url_image">
+                @error('url_image')
+                    <h5 class="text-danger">{{ $message }}</h5>
+                @enderror
+            </div>
         </div>
         <button type="submit" class="btn btn-primary mt-5">Salva</button>
       </form>

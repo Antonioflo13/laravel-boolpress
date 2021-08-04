@@ -3,7 +3,7 @@
 @section('content')
 <section class="container my-5">
     <h4 class="mb-5">Crea Post</h4>
-    <form action="{{ route('admin.posts.store') }}" method="POST">
+    <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="mb-3">
@@ -36,6 +36,13 @@
                 <label class="form-check-label" for="{{$tag->id}}">{{$tag->name}}</label>
             </div>
             @endforeach
+        </div>
+        <div class="form-group">
+            <label for="url_image">Inserisci imagine</label>
+            <input type="file" name="url_image" class="form-control-file @error('url_image') is-invalid @enderror" id="url_image">
+            @error('url_image')
+                <h5 class="text-danger">{{ $message }}</h5>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary mt-5">Salva</button>
       </form>

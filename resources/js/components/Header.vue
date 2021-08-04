@@ -33,7 +33,7 @@ export default {
 <style lang="scss">
     #navbarNav {
         ul li {
-            a .router-link-active{
+            a .router-link-active {
                 color: blue;
             }
         }
