@@ -11,7 +11,7 @@ class ContactMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $lead;
+    private $lead;
 
     /**
      * Create a new message instance.
@@ -30,6 +30,8 @@ class ContactMessage extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.contact');
+        return $this->view('mails.contact')->with([
+            'lead' => $this->lead
+        ]);
     }
 }
