@@ -14,6 +14,12 @@ class PostController extends Controller
     }
     public function show($slug) {
         $post = Post::where('slug',$slug)->with('category', 'tags')->first();
+        if ($post->url_image) {
+            $post->url_image = url('storage/' . $post->url_image);
+        }else {
+            $post->url_image = url('images/placeholder.png');
+        }
+
         return response()->json($post);
     }
 }

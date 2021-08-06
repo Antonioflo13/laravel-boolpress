@@ -6,6 +6,7 @@
             <span class="badge badge-success">{{ tag.name }}</span>
         </div>
         <p>{{ post.content }}</p>
+        <img class="img-fluid" :src="post.url_image" :alt="post.title">
         <router-link class="btn btn-primary" :to="{ name:'blog' }">Torna all' elenco Post</router-link>
     </section>
 </template>

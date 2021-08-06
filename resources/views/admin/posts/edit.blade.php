@@ -2,7 +2,7 @@
 @section('content')
 <section class="container my-5">
     <h4 class="mb-5">Modifica Post</h4>
-    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
+    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="mb-3">

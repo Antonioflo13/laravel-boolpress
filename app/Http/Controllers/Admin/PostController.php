@@ -163,7 +163,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
-    {
+    {   
+        if ($post->url_image) {
+            Storage::delete($post->url_image);
+        }
+
         $post->delete();
         return redirect()->route('admin.posts.index');
     }

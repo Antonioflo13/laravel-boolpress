@@ -15,6 +15,9 @@
                             <router-link class="nav-link" :to="{ name:'blog' }">Blog</router-link>
                         </li>
                         <li>
+                            <router-link class="nav-link" :to="{ name:'contact-us' }">Contattaci</router-link>
+                        </li>
+                        <li>
                             <router-link class="nav-link" :to="{ name:'' }">Chi siamo</router-link>
                         </li>
                     </ul>
